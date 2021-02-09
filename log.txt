@@ -1,0 +1,10 @@
+commit 7e94b195be321562e1eb3a99701b2246c6fa3bcc (HEAD -> master)
+Author: Filippov Maxim <filippov.maxim52@gmail.com>
+Date:   Tue Feb 9 19:36:10 2021 +0300
+
+    add status.txt
+
+commit da495e8d527039f7e51335a7586e1605914dc263
+Author: Filippov Maxim <filippov.maxim52@gmail.com>
+Date:   Tue Feb 9 19:34:07 2021 +0300
+:
