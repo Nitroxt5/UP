@@ -1,6 +1,9 @@
 body {
   background: #232323;
 }
+a {
+  text-decoration: none;
+}
 .header{
   position: fixed;
   background: #444444;
@@ -10,14 +13,21 @@ body {
   top: 0%;
   left: 0%;
 }
+#findByHashtag{
+  border-color: #FFFFFF;
+  width: 85%;
+  margin-left: 1.5%;
+}
 h1 {
+  font-family: segoe script;
   color: #FFFFFF;
   font-size: 145%;
   font-weight: bold;
   margin-left: 12%;
 }
 .magnifier {
-  width: 4%;
+  margin-top: 1%;
+  width: 15px;
 }
 .searcher {
   position: absolute;
@@ -30,14 +40,14 @@ h1 {
   width: 20%;
   font-size: 87%;
   color: #c0c0c0;
-  left: 40%;
+  left: 45%;
   top: 0.5%;
 }
 .avatar {
   position: absolute;
   border-radius: 50%;
-  left: 72%;
-  width: 3.5%;
+  right: 24%;
+  height: 90%;
   top: 1%;
 }
 .account {
@@ -52,7 +62,7 @@ h1 {
   font-size: 100%;
   font-weight: bold;
   color: #ffffff;
-  left: 76%;
+  right: 13%;
   top: 0.5%;
 }
 .main1 {
@@ -73,6 +83,86 @@ ul li {
   font-size: 100%;
   list-style-image: url(list_mark2.png);
 }
+.profile_button {
+  cursor: pointer;
+  position: absolute;
+  border: solid #444444; 
+  background: #444444;
+  border-radius: 1em; 
+  padding-top: 0.2%; 
+  padding-bottom: 0.2%;
+  text-align: center;
+  width: 70%;
+  left: 10%;
+  top: 5%;
+}
+.profile_button:hover {
+  background: #606060;
+}
+.myphoto_button {
+  cursor: pointer;
+  position: absolute;
+  border: solid #444444; 
+  background: #444444;
+  border-radius: 1em; 
+  padding-top: 0.2%; 
+  padding-bottom: 0.2%;
+  text-align: center;
+  width: 70%;
+  left: 10%;
+  top: 10%;
+}
+.myphoto_button:hover {
+  background: #606060;
+}
+.addphoto_button {
+  cursor: pointer;
+  position: absolute;
+  border: solid #444444; 
+  background: #444444;
+  border-radius: 1em; 
+  padding-top: 0.2%; 
+  padding-bottom: 0.2%;
+  text-align: center;
+  width: 70%;
+  left: 10%;
+  top: 15%;
+}
+.addphoto_button:hover {
+  background: #606060;
+}
+.service_button {
+  cursor: pointer;
+  position: absolute;
+  border: solid #444444; 
+  background: #444444;
+  border-radius: 1em; 
+  padding-top: 0.2%; 
+  padding-bottom: 0.2%;
+  text-align: center;
+  width: 70%;
+  left: 10%;
+  top: 20%;
+}
+.service_button:hover {
+  background: #606060;
+}
+.tomain_button {
+  cursor: pointer;
+  position: absolute;
+  border: solid #444444; 
+  background: #444444;
+  border-radius: 1em; 
+  padding-top: 0.2%; 
+  padding-bottom: 0.2%;
+  text-align: center;
+  width: 70%;
+  left: 10%;
+  bottom: 10%;
+}
+.tomain_button:hover {
+  background: #606060;
+}
 .main2 {
   position:absolute;
   background: #444444;
@@ -84,17 +174,21 @@ ul li {
   left: 34%;
 }
 .post1 {
-  position: absolute;
+  position: relative;
   background: #606060;
   border: solid #000000 1px;
   left: 25%;
-  top: 0.85%;
+  top: 1%;
   width: 60%;
   height: 14.4%;
 }
 .pic1 {
   border-bottom: solid #000000 1px;
   width: 100%;
+}
+p2 {
+  font-size: 120%;
+  color: #d6d6d6;
 }
 .author {
   position: absolute;
@@ -134,14 +228,27 @@ ul li {
   bottom: 0%;
   right: 2%;
 }
-.post2 {
-  position: absolute;
-  background: #606060;
-  border: solid #000000 1px;
-  left: 25%;
-  top: 16%;
-  width: 60%;
-  height: 14.4%;
+.main3 {
+  position:absolute;
+  background: #444444;
+  height: 86%;
+  width: 53%;
+  border-left: 4px solid #000000;
+  border-right: 4px solid #000000;
+  top: 9%;
+  left: 34%;
+}
+.post_photo {
+  position:absolute;
+  left: 5%;
+  width: 50%;
+  top: 2%;
+}
+.profile_avatar {
+  border-radius: 50%;
+  left: 5%;
+  width: 50%;
+  top: 2%;
 }
 .footer {
   position: fixed;
@@ -158,6 +265,4 @@ h2 {
   font-weight: bold;
   text-align: center;
   margin-top: 0.5%;
-  margin-left: 12%;
-  margin-right: 12%;
 }

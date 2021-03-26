@@ -1,9 +1,14 @@
 <html>
+
 <head>
-<title> Фотострельбище </title>
+<title> Main </title>
 <link rel="stylesheet" type="text/css" href="styles.css" media="screen">
 </head>
+
 <body>
+
+<script src="script.js"></script>
+
 <div class="main1">
 <LI>Сортировать по:
 <UL>
@@ -12,30 +17,22 @@
 <LI>Популярности
 </UL>
 </div>
-<div class="main2">
-<div class="post1">
-<img src = "AK-74.png" class = "pic1">
-<p2 class="author">Maxim</p2>
-<p2 class="name">AK-74</p2>
-<img src = "like.png" class = "like">
-<p2 class="about">Подробнее...</p2>
+
+<div class="main2" onLoad="loadPhotoPosts()">
+
 </div>
-<div class="post2">
-<img src = "AK-74.png" class = "pic1">
-<p2 class="author">Maxim</p2>
-<p2 class="name">AK-74</p2>
-<img src = "like.png" class = "like">
-<p2 class="about">Подробнее...</p2>
-</div>
-</div>
+
 <div class="header">
-<h1>ФОТОСТРЕЛЬБИЩЕ</h1>
-<p class="searcher"><img src = "header_mark.png" class="magnifier"> Поиск по хештегу</p>
+<h1>ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ</h1>
+<p class="searcher"><img src = "searcher_mark.png" class="magnifier"><input id="findByHashtag" type="hashtag"/></p>
 <img src = "image_placeholder.png" class = "avatar">
-<p class="account"> Аккаунт</p>
+<a href = "profile.html"><p class="account"> Аккаунт</p></a>
 </div>
+
 <div class="footer">
-<h2>ФОТОСТРЕЛЬБИЩЕ	Филиппов Максим	2к9гр	filippov.maxim52@gmail.com	01.03.2021</h2>
+<h2>ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ Филиппов Максим 2к9гр filippov.maxim52@gmail.com 01.03.2021</h2>
 </div>
+
 </body>
+
 </html>
