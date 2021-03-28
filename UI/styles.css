@@ -1,268 +1,360 @@
 body {
-  background: #232323;
+    background: #232323;
 }
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 .header{
-  position: fixed;
-  background: #444444;
-  height: 8%;
-  width: 100%;
-  border: 4px solid #000000;
-  top: 0%;
-  left: 0%;
+    position: fixed;
+    background: #444444;
+    height: 8%;
+    width: 100%;
+    border: 4px solid #000000;
+    top: 0%;
+    left: 0%;
 }
 #findByHashtag{
-  border-color: #FFFFFF;
-  width: 85%;
-  margin-left: 1.5%;
+    border-color: #FFFFFF;
+    width: 85%;
+    margin-left: 1.5%;
 }
 h1 {
-  font-family: segoe script;
-  color: #FFFFFF;
-  font-size: 145%;
-  font-weight: bold;
-  margin-left: 12%;
+    font-family: segoe script;
+    color: #FFFFFF;
+    font-size: 145%;
+    font-weight: bold;
+    margin-left: 12%;
 }
 .magnifier {
-  margin-top: 1%;
-  width: 15px;
+    margin-top: 1%;
+    width: 15px;
 }
 .searcher {
-  position: absolute;
-  border: solid #000000; 
-  background: #FFFFFF;
-  border-radius: 1em; 
-  padding-left: 0.5%;
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  width: 20%;
-  font-size: 87%;
-  color: #c0c0c0;
-  left: 45%;
-  top: 0.5%;
+    position: absolute;
+    border: solid #000000; 
+    background: #FFFFFF;
+    border-radius: 1em; 
+    padding-left: 0.5%;
+    padding-top: 0.2%; 
+    padding-bottom: 0.2%;
+    width: 20%;
+    font-size: 87%;
+    color: #c0c0c0;
+    left: 45%;
+    top: 0.5%;
 }
 .avatar {
-  position: absolute;
-  border-radius: 50%;
-  right: 24%;
-  height: 90%;
-  top: 1%;
+    position: absolute;
+    border-radius: 50%;
+    right: 24%;
+    height: 90%;
+    top: 1%;
 }
 .account {
-  position: absolute;
-  border: solid #aaaaaa; 
-  background: #aaaaaa;
-  border-radius: 0.5em; 
-  padding-left: 0.5%;
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  width: 10%;
-  font-size: 100%;
-  font-weight: bold;
-  color: #ffffff;
-  right: 13%;
-  top: 0.5%;
+    position: absolute;
+    border: solid #aaaaaa; 
+    background: #aaaaaa;
+    border-radius: 0.5em; 
+    padding-left: 0.5%;
+    padding-top: 0.2%; 
+    padding-bottom: 0.2%;
+    width: 10%;
+    font-size: 100%;
+    font-weight: bold;
+    color: #ffffff;
+    right: 13%;
+    top: 0.5%;
 }
 .main1 {
-  position:fixed;
-  background: #444444;
-  height: 85%;
-  width: 22%;
-  border-left: 4px solid #000000;
-  top: 9%;
-  left: 12%;
+    position:fixed;
+    background: #444444;
+    height: 85%;
+    width: 22%;
+    border-left: 4px solid #000000;
+    top: 9%;
+    left: 12%;
 }
-li {
-  color: #d6d6d6;
-  font-size: 145%;
-  list-style-image: url(list_mark1.png);
+p3 {
+    font-size: 145%;
+    color: #d6d6d6;
+    margin-left: 5%;
 }
-ul li {
-  font-size: 100%;
-  list-style-image: url(list_mark2.png);
+.authorFilter {
+    position: relative;
+    margin-right: 1%;
 }
-.profile_button {
-  cursor: pointer;
-  position: absolute;
-  border: solid #444444; 
-  background: #444444;
-  border-radius: 1em; 
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  text-align: center;
-  width: 70%;
-  left: 10%;
-  top: 5%;
+.createdAtFilter {
+    position: relative;
+    margin-right: 1%;
 }
-.profile_button:hover {
-  background: #606060;
+.likesFilter {
+    position: relative;
+    margin-right: 1%;
 }
-.myphoto_button {
-  cursor: pointer;
-  position: absolute;
-  border: solid #444444; 
-  background: #444444;
-  border-radius: 1em; 
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  text-align: center;
-  width: 70%;
-  left: 10%;
-  top: 10%;
+.main1button {
+    cursor: pointer;
+    position: relative;
+    border: solid #444444; 
+    background: #444444;
+    border-radius: 1em; 
+    padding-top: 0.2%; 
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 70%;
+    left: 10%;
+    margin-top: 2%;
 }
-.myphoto_button:hover {
-  background: #606060;
-}
-.addphoto_button {
-  cursor: pointer;
-  position: absolute;
-  border: solid #444444; 
-  background: #444444;
-  border-radius: 1em; 
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  text-align: center;
-  width: 70%;
-  left: 10%;
-  top: 15%;
-}
-.addphoto_button:hover {
-  background: #606060;
-}
-.service_button {
-  cursor: pointer;
-  position: absolute;
-  border: solid #444444; 
-  background: #444444;
-  border-radius: 1em; 
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  text-align: center;
-  width: 70%;
-  left: 10%;
-  top: 20%;
-}
-.service_button:hover {
-  background: #606060;
+.main1button:hover {
+    background: #606060;
 }
 .tomain_button {
-  cursor: pointer;
-  position: absolute;
-  border: solid #444444; 
-  background: #444444;
-  border-radius: 1em; 
-  padding-top: 0.2%; 
-  padding-bottom: 0.2%;
-  text-align: center;
-  width: 70%;
-  left: 10%;
-  bottom: 10%;
+    cursor: pointer;
+    position: relative;
+    border: solid #444444; 
+    background: #444444;
+    border-radius: 1em; 
+    padding-top: 0.2%; 
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 70%;
+    left: 10%;
+    margin-top: 120%;
 }
 .tomain_button:hover {
-  background: #606060;
+    background: #606060;
 }
 .main2 {
-  position:absolute;
-  background: #444444;
-  height: 500%;
-  width: 53%;
-  border-left: 4px solid #000000;
-  border-right: 4px solid #000000;
-  top: 9%;
-  left: 34%;
+    position:absolute;
+    background: #444444;
+    height: 800%;
+    width: 53%;
+    border-left: 4px solid #000000;
+    border-right: 4px solid #000000;
+    top: 9%;
+    left: 34%;
 }
-.post1 {
-  position: relative;
-  background: #606060;
-  border: solid #000000 1px;
-  left: 25%;
-  top: 1%;
-  width: 60%;
-  height: 14.4%;
+.post {
+    position: relative;
+    background: #606060;
+    border: solid #000000 1px;
+    left: 25%;
+    margin-top: 5.5%;
+    width: 60%;
+    height: 9%;
 }
-.pic1 {
-  border-bottom: solid #000000 1px;
-  width: 100%;
+.pic {
+    border-bottom: solid #000000 1px;
+    width: 100%;
+}
+.nextPageButton {
+    cursor: pointer;
+    position: absolute;
+    border: solid #444444;
+    background: #444444;
+    border-radius: 1em;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 35%;
+    left: 60%;
+    margin-top: 5.5%;
+}
+.nextPageButton:hover {
+    background: #606060;
+}
+.pageCounter {
+    position: absolute;
+    border: solid #444444;
+    background: #444444;
+    text-align: center;
+    width: 16%;
+    left: 42%;
+    margin-top: 5.5%;
+}
+.prevPageButton {
+    cursor: pointer;
+    position: absolute;
+    border: solid #444444;
+    background: #444444;
+    border-radius: 1em;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 35%;
+    left: 5%;
+    margin-top: 5.5%;
+}
+.prevPageButton:hover {
+    background: #606060;
+}
+.arrow {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    width: 30px;
 }
 p2 {
-  font-size: 120%;
-  color: #d6d6d6;
+    font-size: 120%;
+    color: #d6d6d6;
+}
+p4 {
+    font-size: 120%;
+    color: #000000;
 }
 .author {
-  position: absolute;
-  border-bottom: solid #000000 1px; 
-  border-right: solid #000000 1px;
-  background: #606060;
-  padding-left: 0.5%;
-  width: 30%;
-  font-size: 120%;
-  color: #d6d6d6;
-  bottom: 6%;
-  left: 0%;
+    position: absolute;
+    border-bottom: solid #000000 1px; 
+    border-right: solid #000000 1px;
+    background: #606060;
+    padding-left: 0.5%;
+    width: 30%;
+    font-size: 120%;
+    color: #d6d6d6;
+    bottom: 6%;
+    left: 0%;
 }
 .name {
-  position: absolute;
-  border-bottom: solid #000000 1px; 
-  background: #606060;
-  padding-left: 0.5%;
-  width: 68%;
-  font-size: 120%;
-  color: #d6d6d6;
-  bottom: 6%;
-  left: 31%;
+    position: absolute;
+    border-bottom: solid #000000 1px; 
+    background: #606060;
+    padding-left: 0.5%;
+    width: 68%;
+    font-size: 120%;
+    color: #d6d6d6;
+    bottom: 6%;
+    left: 31%;
 }
 .like {
-  position: absolute;
-  left: 2%;
-  bottom: 0.5%;
-  width: 5%;
+    position: relative;
+    margin-top: 6%;
+    margin-left: 1%;
+    width: 5%;
+}
+.likesCounter {
+    font-size: 145%;
+    position: relative;
+    margin-left: 2%;
+    bottom: 0.5%;
 }
 .about {
-  position: absolute;
-  background: #606060;
-  padding-left: 0.5%;
-  font-size: 120%;
-  color: #d6d6d6;
-  bottom: 0%;
-  right: 2%;
+    position: absolute;
+    background: #606060;
+    padding-left: 0.5%;
+    font-size: 120%;
+    color: #d6d6d6;
+    bottom: 0%;
+    right: 2%;
 }
 .main3 {
-  position:absolute;
-  background: #444444;
-  height: 86%;
-  width: 53%;
-  border-left: 4px solid #000000;
-  border-right: 4px solid #000000;
-  top: 9%;
-  left: 34%;
+    position:absolute;
+    background: #444444;
+    height: 86%;
+    width: 53%;
+    border-left: 4px solid #000000;
+    border-right: 4px solid #000000;
+    top: 9%;
+    left: 34%;
 }
 .post_photo {
-  position:absolute;
-  left: 5%;
-  width: 50%;
-  top: 2%;
+    position:relative;
+    left: 5%;
+    width: 40%;
+    top: 2%;
 }
 .profile_avatar {
-  border-radius: 50%;
-  left: 5%;
-  width: 50%;
-  top: 2%;
+    position: relative;
+    border-radius: 50%;
+    left: 25%;
+    width: 50%;
+    top: 2%;
+}
+.accountInfo {
+    position: relative;
+    left: 25%;
+    top: 10%;
 }
 .footer {
-  position: fixed;
-  background: #444444;
-  height: 5%;
-  width: 100%;
-  border: 4px solid #000000;
-  top: 94%;
-  left: 0%;
+    position: fixed;
+    background: #444444;
+    height: 5%;
+    width: 100%;
+    border: 4px solid #000000;
+    top: 94%;
+    left: 0%;
 }
 h2 {
-  color: #FFFFFF;
-  font-size: 145%;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 0.5%;
+    color: #FFFFFF;
+    font-size: 145%;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0.5%;
+}
+.infomain1 {
+    position: absolute;
+    background: #444444;
+    height: 86%;
+    width: 30%;
+    border-left: 4px solid #000000;
+    top: 9%;
+    left: 15%;
+}
+.infomain2 {
+    position: absolute;
+    background: #444444;
+    height: 86%;
+    width: 40%;
+    border-right: 4px solid #000000;
+    top: 9%;
+    left: 45%;
+}
+.infoPhoto {
+    position: relative;
+    border-radius: 1em;
+    left: 4%;
+    width: 90%;
+    top: 2%;
+}
+.description {
+    font-weight: bold;
+    margin-left: 4%;
+    top: 10%;
+}
+.descriptionBlock {
+    position: relative;
+    background: #c0c0c0;
+    border-radius: 1em;
+    height: 86%;
+    width: 90%;
+    border: 6px solid #606060;
+    top: 5%;
+    left: 5%;
+}
+.toMainInfoButton {
+    cursor: pointer;
+    position: absolute;
+    border: solid #444444;
+    background: #444444;
+    border-radius: 1em;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 40%;
+    left: 30%;
+    bottom: 10%;
+}
+.toMainInfoButton:hover {
+    background: #606060;
+}
+.system {
+    position: relative;
+    margin-left: 4%;
+    top: 3%;
+}
+.systemBlock {
+    position: relative;
+    background: #444444;
+    height: 86%;
+    width: 90%;
+    top: 5%;
+    left: 5%;
 }
