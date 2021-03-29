@@ -10,40 +10,59 @@
         <div class="main1">
 
             <div class="main1button">
-                <a href = "profile.html"><p2>Профиль</p2></a>
+                <a href="profile.html"><p2>Профиль</p2></a>
             </div>
 
             <div class="main1button">
-                <a href = "myphotos.html"><p2>Мои фото</p2></a>
+                <a href="addphoto.html"><p2>Добавить фото</p2></a>
             </div>
 
             <div class="main1button">
-                <a href = "addphoto.html"><p2>Добавить фото</p2></a>
-            </div>
-
-            <div class="main1button">
-                <a href = "about.html"><p2>О системе</p2></a>
+                <a href="about.html"><p2>О системе</p2></a>
             </div>
 
             <div class="tomain_button">
-                <a href = "index.html"><p2>Вернуться к ленте</p2></a>
+                <a href="index.html"><p2>Вернуться к ленте</p2></a>
             </div>
 
         </div>
 
         <div class="main3">
-            <img src = "pictures/image_placeholder.png" class = "post_photo">
+            <img src="pictures/image_placeholder.png" class="post_photo"><br />
+            <div class="addPhotoBlock">
+                <br /><p4 class="description">None</p4><br /><br />
+                <p4 class="description">None</p4><br /><br />
+            </div>
+            <p2 class="addPostText1">Введите название оружия:</p2>
+            <input class="postName" /><br />
+            <p2 class="addPostText2">Введите год выпуска оружия:</p2>
+            <input class="postBirthYear" /><br />
+            <p2 class="addPostText3">Введите страну выпуска оружия:</p2>
+            <input class="postCountry" /><br />
+            <p2 class="addPostText4">Придумайте дополнительное описание:</p2>
+            <textarea class="postDescription" /></textarea><br />
+            <p2 class="addPostText5">Добавьте хештэги (через пробел):</p2>
+            <textarea class="postHashtags" /></textarea>
+            <p2 class="photoText">Загрузите фото: </p2><input class="inputPhoto" type="file" />
+            <div id="errorField2">
+                <h4 id="errorText"></h4>
+            </div>
+            <div class="createPostButton">
+                <p2>Создать пост</p2>
+            </div>
         </div>
 
         <div class="header">
             <h1>ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ</h1>
-            <img src = "pictures/image_placeholder.png" class = "avatar">
-            <a href = "profile.html"><p class="account"> Аккаунт</p></a>
+            <img src="pictures/image_placeholder.png" class="avatar">
+            <a href="profile.html"><p class="account"> Аккаунт</p></a>
         </div>
 
         <div class="footer">
-            <h2>ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ Филиппов Максим 2к9гр filippov.maxim52@gmail.com 01.03.2021</h2>
+            <h2 class="footerText"></h2>
         </div>
+        <script src="javascript/classes.js"></script>
+        <script src="javascript/addPhoto.js"></script>
 
     </body>
 
