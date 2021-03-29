@@ -13,10 +13,23 @@ a {
     top: 0%;
     left: 0%;
 }
-#findByHashtag{
-    border-color: #FFFFFF;
-    width: 85%;
-    margin-left: 1.5%;
+#findByHashtag {
+    position: absolute;
+    left: 45%;
+    top: 0.5%;
+    border: none;
+    background-image: url('pictures/searcher_mark.png');
+    background-repeat: no-repeat;
+    background-position: 8px 5px;
+    width: 20%;
+    font-size: 87%;
+    margin-top: 1%;
+    padding-top: 0.3%;
+    padding-bottom: 0.3%;
+    padding-left: 30px;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 h1 {
     font-family: segoe script;
@@ -24,24 +37,6 @@ h1 {
     font-size: 145%;
     font-weight: bold;
     margin-left: 12%;
-}
-.magnifier {
-    margin-top: 1%;
-    width: 15px;
-}
-.searcher {
-    position: absolute;
-    border: solid #000000; 
-    background: #FFFFFF;
-    border-radius: 1em; 
-    padding-left: 0.5%;
-    padding-top: 0.2%; 
-    padding-bottom: 0.2%;
-    width: 20%;
-    font-size: 87%;
-    color: #c0c0c0;
-    left: 45%;
-    top: 0.5%;
 }
 .avatar {
     position: absolute;
@@ -256,7 +251,7 @@ p4 {
     left: 34%;
 }
 .post_photo {
-    position:relative;
+    position:absolute;
     left: 5%;
     width: 40%;
     top: 2%;
@@ -264,6 +259,7 @@ p4 {
 .profile_avatar {
     position: relative;
     border-radius: 50%;
+    border: 6px solid #000000;
     left: 25%;
     width: 50%;
     top: 2%;
@@ -271,7 +267,11 @@ p4 {
 .accountInfo {
     position: relative;
     left: 25%;
-    top: 10%;
+    top: 2%;
+}
+.accountInfo.question {
+    left: 20%;
+    top: 0%;
 }
 .footer {
     position: fixed;
@@ -358,3 +358,271 @@ h2 {
     top: 5%;
     left: 5%;
 }
+.main4 {
+    position: absolute;
+    background: #444444;
+    height: 86%;
+    width: 70%;
+    border-left: 4px solid #000000;
+    border-right: 4px solid #000000;
+    top: 9%;
+    left: 15%;
+}
+h3 {
+    color: #FFFFFF;
+    font-size: 250%;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10%;
+}
+h4 {
+    color: #FF0000;
+    font-size: 145%;
+    font-weight: bold;
+    text-align: center;
+}
+#errorField {
+    position: absolute;
+    background: #444444;
+    width: 70%;
+    left: 15%;
+}
+#errorField2 {
+    position: absolute;
+    background: #444444;
+    width: 40%;
+    left: 5%;
+    top: 60%;
+}
+#email {
+    position: absolute;
+    left: 35%;
+    top: 30%;
+    width: 35%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+#login {
+    position: absolute;
+    left: 35%;
+    top: 40%;
+    width: 35%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+#password {
+    position: absolute;
+    left: 35%;
+    top: 50%;
+    width: 35%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+#emailText {
+    position: absolute;
+    left: 25%;
+    top: 30%;
+}
+
+#loginText {
+    position: absolute;
+    left: 25%;
+    top: 40%;
+}
+
+#passwordText {
+    position: absolute;
+    left: 25%;
+    top: 50%;
+}
+p5 {
+    font-size: 145%;
+    color: #d6d6d6;
+}
+p6 {
+    font-size: 145%;
+    color: #0094FF;
+}
+#registration {
+    position: absolute;
+    background: #606060;
+    left: 43%;
+    top: 60%;
+    height: 5%;
+    width: 20%;
+}
+#regText {
+    position: absolute;
+    left: 20%;
+    top: 70%;
+}
+#enterAsUser {
+    position: absolute;
+    left: 43%;
+    top: 70%;
+}
+#regAsUser {
+    position: absolute;
+    left: 46%;
+    top: 70%;
+}
+#guestText {
+    position: absolute;
+    left: 20%;
+    top: 80%;
+}
+#enterAsGuest {
+    position: absolute;
+    left: 24.5%;
+    top: 80%;
+}
+.logOutButton {
+    cursor: pointer;
+    position: relative;
+    border: solid #444444;
+    background: #606060;
+    border-radius: 1em;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 30%;
+    left: 35%;
+    margin-top: 5%;
+}
+.inputProfileAvatar {
+    position: relative;
+    left: 20%;
+    margin-top: 4%;
+    width: 14.5%;
+}
+.photoText {
+    position: absolute;
+    left: 5%;
+    top: 55%;
+}
+.inputPhoto {
+    position: absolute;
+    left: 25%;
+    width: 14.5%;
+    top: 55%;
+}
+.addPhotoBlock {
+    position: absolute;
+    background: #c0c0c0;
+    border-radius: 1em;
+    height: 15%;
+    width: 40%;
+    border: 6px solid #606060;
+    top: 5%;
+    left: 55%;
+}
+.addPostText1{
+    position:absolute;
+    left: 55%;
+    top: 25%;
+}
+.addPostText2 {
+    position: absolute;
+    left: 55%;
+    top: 35%;
+}
+.addPostText3 {
+    position: absolute;
+    left: 55%;
+    top: 45%;
+}
+.addPostText4 {
+    position: absolute;
+    left: 55%;
+    top: 55%;
+}
+.addPostText5 {
+    position: absolute;
+    left: 55%;
+    top: 76%;
+}
+.postName {
+    position: absolute;
+    left: 55%;
+    top: 30%;
+    width: 35%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.postBirthYear {
+    position: absolute;
+    left: 55%;
+    top: 40%;
+    width: 35%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.postCountry {
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    width: 35%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.postDescription {
+    position: absolute;
+    left: 55%;
+    top: 60%;
+    width: 35%;
+    height: 15%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.postHashTags {
+    position: absolute;
+    left: 55%;
+    top: 81%;
+    width: 35%;
+    height: 10%;
+    border: none;
+    padding: 0.5%;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.createPostButton {
+    cursor: pointer;
+    position: absolute;
+    border: solid #444444;
+    background: #444444;
+    border-radius: 1em;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+    text-align: center;
+    width: 30%;
+    left: 5%;
+    top: 85%;
+}
+.createPostButton:hover {
+    background: #606060;
+}
+
+
+
