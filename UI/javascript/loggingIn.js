@@ -16,11 +16,11 @@ loginButton.onclick = () => {
     if (currentAccount === undefined) {
         inputLogin.value = '';
         inputPassword.value = '';
-        error.textContent = 'Ошибка! Такого аккаунта не существует!';
+        error.textContent = 'РћС€РёР±РєР°! РўР°РєРѕРіРѕ Р°РєРєР°СѓРЅС‚Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!';
     } else if (currentAccount.Password !== password) {
         inputLogin.value = '';
         inputPassword.value = '';
-        error.textContent = 'Ошибка! Неверный пароль!';
+        error.textContent = 'РћС€РёР±РєР°! РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ!';
     } else {
         error.textContent = '';
         localStorage.setItem('currentAccount', currentAccount.stringify());

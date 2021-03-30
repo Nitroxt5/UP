@@ -1,13 +1,33 @@
+const nextPageButton = document.querySelector('.nextPageButton');
+const pageCounter = document.querySelector('.pageCounter');
+const prevPageButton = document.querySelector('.prevPageButton');
+const authorFilter = document.querySelector('.authorFilter');
+const createdAtFilter = document.querySelector('.createdAtFilter');
+const likesFilter = document.querySelector('.likesFilter');
+
 function indexLoad() {
     photoPosts = View.downloadPosts();
+    PostsArray.filterConfig = localStorage.getItem('filterConfig');
     currentPhotoPosts = View.showPage(currentSkip, currentTop, photoPosts);
+    switch (PostsArray.filterConfig) {
+        case 'author':
+            View.filterChosen(authorFilter, createdAtFilter, likesFilter, 1);
+            break;
+        case 'createdAt':
+            View.filterChosen(authorFilter, createdAtFilter, likesFilter, 2);
+            break;
+        case 'likes':
+            View.filterChosen(authorFilter, createdAtFilter, likesFilter, 3);
+            break;
+        default:
+            View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
+    }
+    prevPageButton.style.visibility = 'hidden';
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }
 document.addEventListener("DOMContentLoaded", indexLoad);
 
-const nextPageButton = document.querySelector('.nextPageButton');
-const pageCounter = document.querySelector('.pageCounter');
 nextPageButton.onclick = () => {
     if (currentSkip + currentTop + 10 <= photoPosts.Length) {
         currentSkip += 10;
@@ -16,9 +36,10 @@ nextPageButton.onclick = () => {
     }
     currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
     currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-    View.pageTurned(pageCounter, 2, photoPosts);
+    View.pageTurned(pageCounter, 2, photoPosts, prevPageButton, nextPageButton);
+    window.scroll(0, 0);
 }
-const prevPageButton = document.querySelector('.prevPageButton');
+
 prevPageButton.onclick = () => {
     if (currentSkip - 10 >= 0) {
         currentSkip -= 10;
@@ -27,7 +48,8 @@ prevPageButton.onclick = () => {
     }
     currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
     currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-    View.pageTurned(pageCounter, 1, photoPosts);
+    View.pageTurned(pageCounter, 1, photoPosts, prevPageButton, nextPageButton);
+    window.scroll(0, 0);
 }
 
 const abouts = document.querySelectorAll('.about');
@@ -72,9 +94,6 @@ abouts[9].onclick = () => {
     localStorage.setItem('infoPost', post.stringify());
 }
 
-const authorFilter = document.querySelector('.authorFilter');
-const createdAtFilter = document.querySelector('.createdAtFilter');
-const likesFilter = document.querySelector('.likesFilter');
 authorFilter.onclick = () => {
     if (authorFilter.src.includes('list_mark1.png')) {
         PostsArray.filterConfig = 'author';
@@ -85,8 +104,8 @@ authorFilter.onclick = () => {
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-        localStorage.setItem('filterConfig', PostsArray.filterConfig);
     }
+    localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }
 createdAtFilter.onclick = () => {
     if (createdAtFilter.src.includes('list_mark1.png')) {
@@ -98,8 +117,8 @@ createdAtFilter.onclick = () => {
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-        localStorage.setItem('filterConfig', PostsArray.filterConfig);
     }
+    localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }
 likesFilter.onclick = () => {
     if (likesFilter.src.includes('list_mark1.png')) {
@@ -111,6 +130,6 @@ likesFilter.onclick = () => {
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-        localStorage.setItem('filterConfig', PostsArray.filterConfig);
     }
+    localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }

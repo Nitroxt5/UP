@@ -5,3 +5,9 @@ function infoLoad() {
     footer.textContent = footerText;
 }
 document.addEventListener("DOMContentLoaded", infoLoad);
+
+const backButton = document.querySelector('#back');
+
+backButton.onclick = () => {
+    window.close();
+}

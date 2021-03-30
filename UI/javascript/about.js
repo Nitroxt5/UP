@@ -1,5 +1,8 @@
+const accountName = document.querySelector('.account');
+
 function aboutLoad() {
-    View.downloadCurrentAccount();
+    currentAccount = View.downloadCurrentAccount();
+    accountName.textContent = currentAccount.login;
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }

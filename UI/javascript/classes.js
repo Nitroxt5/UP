@@ -1,7 +1,7 @@
 function dateToString(date) {
-    const Day = currentDate.getDate();
-    const Month = currentDate.getMonth() + 1;
-    const Year = currentDate.getFullYear();
+    const Day = date.getDate();
+    const Month = date.getMonth() + 1;
+    const Year = date.getFullYear();
     return `${Day}.${Month}.${Year}`;
 }
 
@@ -28,8 +28,9 @@ class Post {
     #country;
     #likes;
     #hashtags = [];
+    #likedAuthors = [];
 
-    constructor(id, description, createdAt, author, photoLink, name, country, birthYear, hashtags, likes) {
+    constructor(id, description, createdAt, author, photoLink, name, country, birthYear, hashtags, likes, likedAuthors = []) {
         this.#id = id;
         this.#description = description;
         this.#createdAt = createdAt;
@@ -40,21 +41,51 @@ class Post {
         this.#birthYear = birthYear;
         this.#likes = likes;
         this.#hashtags = hashtags.slice();
+        this.#likedAuthors = likedAuthors.slice();
     }
 
     stringify() {
         let date = dateToString(this.#createdAt);
         let str = `{"id":"${this.#id}","description":"${this.#description}","createdAt":"${date}","author":"${this.#author}","photoLink":"${this.#photoLink}","birthYear":${this.#birthYear},"name":"${this.#name}","country":"${this.#country}","likes":${this.#likes},"hashtags":`;
         let str2 = '[';
+        let str3 = '"likedAuthors":[';
         for (let i = 0; i < this.#hashtags.length; i++) {
             if (i !== 0) {
                 str2 += ',';
             }
             str2 += `"${this.#hashtags[i]}"`;
         }
-        str2 += ']}';
+        for (let i = 0; i < this.#likedAuthors.length; i++) {
+            if (i !== 0) {
+                str3 += ',';
+            }
+            str3 += `"${this.#likedAuthors[i]}"`;
+        }
+        str2 += '],';
+        str3 += ']}';
         str += str2;
+        str += str3;
         return str;
+    }
+
+    likePossibility(currentAccount) {
+        if (this.#likedAuthors.find(likedAuthor => likedAuthor === currentAccount.login) === undefined) {
+            return true;
+        }
+        return false;
+    }
+
+    addLiked(login) {
+        this.#likedAuthors.push(login);
+    }
+
+    removeLiked(login) {
+        const ind = this.#likedAuthors.findIndex(likedAuthor => likedAuthor === login);
+        if (ind === -1) {
+            return false;
+        }
+        this.#likedAuthors.splice(ind, 1);
+        return true;
     }
 
     validatePost(photoPosts) {
@@ -137,6 +168,10 @@ class Post {
     get Hashtags() {
         return this.#hashtags;
     }
+
+    get LikedAuthors() {
+        return this.#likedAuthors;
+    }
 }
 
 class PostsArray {
@@ -185,6 +220,10 @@ class PostsArray {
         const arr = new PostsArray(photoPostsCopy);
         this.#photoPosts.reverse();
         return arr;
+    }
+
+    filterByTag(hashtag) {
+        return new PostsArray(this.#photoPosts.filter(post => post.Hashtags.includes(hashtag)));
     }
 
     getPostByID(id) {
@@ -332,7 +371,7 @@ class View {
             const post = JSON.parse(localStorage.getItem('post' + i));
             const str = post.createdAt.split('.');
             const date = new Date(parseInt(str[2]), parseInt(str[1]) - 1, parseInt(str[0]));
-            const postClass = new Post(post.id, post.description, date, post.author, post.photoLink, post.name, post.country, post.birthYear, post.hashtags, parseInt(post.likes));
+            const postClass = new Post(post.id, post.description, date, post.author, post.photoLink, post.name, post.country, post.birthYear, post.hashtags, parseInt(post.likes), post.likedAuthors);
             posts.push(postClass);
         }
         return new PostsArray(posts);
@@ -370,10 +409,17 @@ class View {
         }
         return currentAccount;
     }
-    static showPage(skip, top, photoPosts) {
-        const photoPostsPage = photoPosts.getPage(skip, top);
+    static showPage(skip, top, photoPosts, currentAccount = '') {
         const main2 = document.querySelector('.main2');
-        for (let i = 0; i < 10; i++) {
+        let photoPostsPage = photoPosts.getPage(skip, top);
+        for (let i = 0; i < photoPostsPage.Length; i++) {
+            main2.children[i].style.visibility = 'visible';
+            if (currentAccount !== '') {
+                const like = main2.children[i].querySelector('.like');
+                if (!photoPostsPage.getPostByInd(i).likePossibility(currentAccount)) {
+                    like.src = 'pictures/like2.png';
+                }
+            }
             const pic = main2.children[i].querySelector('.pic');
             pic.src = photoPostsPage.getPostByInd(i).PhotoLink;
             const author = main2.children[i].querySelector('.author');
@@ -386,6 +432,9 @@ class View {
             } else {
                 likesCounter.textContent = '';
             }
+        }
+        for (let i = photoPostsPage.Length; i < 10; i++) {
+            main2.children[i].style.visibility = 'hidden';
         }
         return photoPostsPage;
     }
@@ -422,18 +471,36 @@ class View {
             likesFilter.src = 'pictures/list_mark1.png';
         }
     }
-    static pageTurned(pageCounter, ind, photoPosts) {
+    static pageTurned(pageCounter, ind, photoPosts, prevButton, nextButton) {
         let num = parseInt(pageCounter.textContent);
         if (ind === 1) {
             if (num > 1) {
                 num--;
+                nextButton.style.visibility = 'visible';
+            } 
+            if (num === 1) {
+                prevButton.style.visibility = 'hidden';
             }
         } else if (ind === 2) {
             if (num < Math.ceil(photoPosts.Length / 10)) {
                 num++;
+                prevButton.style.visibility = 'visible';
+            }
+            if (num === Math.ceil(photoPosts.Length / 10)) {
+                nextButton.style.visibility = 'hidden';
             }
         }
         pageCounter.textContent = num;
+    }
+    static resetPageCounter(pageCounter, photoPosts, prevButton, nextButton) {
+        pageCounter.textContent = 1;
+        prevButton.style.visibility = 'hidden';
+        if (photoPosts.Length <= 10) {
+            nextButton.style.visibility = 'hidden';
+        }
+        else {
+            nextButton.style.visibility = 'visible';
+        }
     }
     static showInfo(post) {
         const infoPhoto = document.querySelector('.infoPhoto');
@@ -460,7 +527,7 @@ const footerText = `ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ Филиппов М�
 let accounts;
 let currentAccount;
 let currentSkip = 0;
-const currentTop = 10;
+let currentTop = 10;
 let photoPosts;
 let currentPhotoPosts;
 

@@ -1,3 +1,5 @@
+const accountName = document.querySelector('.account');
+
 function profileLoad() {
     currentAccount = View.downloadCurrentAccount();
     accounts = View.downloadAccounts();
@@ -11,6 +13,7 @@ function profileLoad() {
     const email = document.querySelector('.accEmail');
     nickname.textContent = currentAccount.login;
     email.textContent = currentAccount.email;
+    accountName.textContent = currentAccount.login;
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }

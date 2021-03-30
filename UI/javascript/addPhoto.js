@@ -1,3 +1,5 @@
+const accountName = document.querySelector('.account');
+
 function addPhotoLoad() {
     photoPosts = View.downloadPosts();
     currentAccount = View.downloadCurrentAccount();
@@ -5,6 +7,7 @@ function addPhotoLoad() {
     description.textContent = `Автор: ${currentAccount.login}`;
     description = description.nextElementSibling.nextElementSibling.nextElementSibling;
     description.textContent = `Дата создания поста: ${dateToString(new Date())}`;
+    accountName.textContent = currentAccount.login;
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }

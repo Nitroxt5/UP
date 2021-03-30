@@ -1,12 +1,16 @@
 const authorFilter = document.querySelector('.authorFilter');
 const createdAtFilter = document.querySelector('.createdAtFilter');
 const likesFilter = document.querySelector('.likesFilter');
+const prevPageButton = document.querySelector('.prevPageButton');
+const nextPageButton = document.querySelector('.nextPageButton');
+const pageCounter = document.querySelector('.pageCounter');
+const accountName = document.querySelector('.account');
 
 function indexLoad() {
     photoPosts = View.downloadPosts();
     PostsArray.filterConfig = localStorage.getItem('filterConfig');
-    currentPhotoPosts = View.showPage(currentSkip, currentTop, photoPosts);
-    View.downloadCurrentAccount();
+    currentAccount = View.downloadCurrentAccount();
+    currentPhotoPosts = View.showPage(currentSkip, currentTop, photoPosts, currentAccount);
     switch (PostsArray.filterConfig) {
         case 'author':
             View.filterChosen(authorFilter, createdAtFilter, likesFilter, 1);
@@ -20,13 +24,16 @@ function indexLoad() {
         default:
             View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
     }
+    prevPageButton.style.visibility = 'hidden';
+    if (photoPosts.Length <= 10) {
+        nextPageButton.style.visibility = 'hidden';
+    }
+    accountName.textContent = currentAccount.login;
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }
 document.addEventListener("DOMContentLoaded", indexLoad);
 
-const nextPageButton = document.querySelector('.nextPageButton');
-const pageCounter = document.querySelector('.pageCounter');
 nextPageButton.onclick = () => {
     if (currentSkip + currentTop + 10 <= photoPosts.Length) {
         currentSkip += 10;
@@ -34,10 +41,11 @@ nextPageButton.onclick = () => {
         currentSkip = photoPosts.Length - currentTop;
     }
     currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
-    currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-    View.pageTurned(pageCounter, 2, photoPosts);
+    currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
+    View.pageTurned(pageCounter, 2, photoPosts, prevPageButton, nextPageButton);
+    window.scroll(0, 0);
 }
-const prevPageButton = document.querySelector('.prevPageButton');
+
 prevPageButton.onclick = () => {
     if (currentSkip - 10 >= 0) {
         currentSkip -= 10;
@@ -45,16 +53,19 @@ prevPageButton.onclick = () => {
         currentSkip = 0;
     }
     currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
-    currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
-    View.pageTurned(pageCounter, 1, photoPosts);
+    currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
+    View.pageTurned(pageCounter, 1, photoPosts, prevPageButton, nextPageButton);
+    window.scroll(0, 0);
 }
 
 const likeButtons = document.querySelectorAll('.like');
 likeButtons[0].onclick = () => {
     if (likeButtons[0].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(0).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(0).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(0).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(0).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(0);
     photoPosts.exchangePost(currentPost);
@@ -64,8 +75,10 @@ likeButtons[0].onclick = () => {
 likeButtons[1].onclick = () => {
     if (likeButtons[1].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(1).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(1).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(1).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(1).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(1);
     photoPosts.exchangePost(currentPost);
@@ -75,8 +88,10 @@ likeButtons[1].onclick = () => {
 likeButtons[2].onclick = () => {
     if (likeButtons[2].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(2).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(2).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(2).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(2).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(2);
     photoPosts.exchangePost(currentPost);
@@ -86,8 +101,10 @@ likeButtons[2].onclick = () => {
 likeButtons[3].onclick = () => {
     if (likeButtons[3].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(3).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(3).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(3).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(3).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(3);
     photoPosts.exchangePost(currentPost);
@@ -97,8 +114,10 @@ likeButtons[3].onclick = () => {
 likeButtons[4].onclick = () => {
     if (likeButtons[4].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(4).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(4).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(4).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(4).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(4);
     photoPosts.exchangePost(currentPost);
@@ -108,8 +127,10 @@ likeButtons[4].onclick = () => {
 likeButtons[5].onclick = () => {
     if (likeButtons[5].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(5).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(5).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(5).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(5).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(5);
     photoPosts.exchangePost(currentPost);
@@ -119,8 +140,10 @@ likeButtons[5].onclick = () => {
 likeButtons[6].onclick = () => {
     if (likeButtons[6].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(6).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(6).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(6).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(6).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(6);
     photoPosts.exchangePost(currentPost);
@@ -130,8 +153,10 @@ likeButtons[6].onclick = () => {
 likeButtons[7].onclick = () => {
     if (likeButtons[7].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(7).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(7).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(7).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(7).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(7);
     photoPosts.exchangePost(currentPost);
@@ -141,8 +166,10 @@ likeButtons[7].onclick = () => {
 likeButtons[8].onclick = () => {
     if (likeButtons[8].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(8).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(8).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(8).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(8).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(8);
     photoPosts.exchangePost(currentPost);
@@ -152,8 +179,10 @@ likeButtons[8].onclick = () => {
 likeButtons[9].onclick = () => {
     if (likeButtons[9].src.includes('like.png')) {
         currentPhotoPosts.getPostByInd(9).IncreaseLikes();
+        currentPhotoPosts.getPostByInd(9).addLiked(currentAccount.login);
     } else {
         currentPhotoPosts.getPostByInd(9).DecreaseLikes();
+        currentPhotoPosts.getPostByInd(9).removeLiked(currentAccount.login);
     }
     currentPost = currentPhotoPosts.getPostByInd(9);
     photoPosts.exchangePost(currentPost);
@@ -207,12 +236,12 @@ authorFilter.onclick = () => {
     if (authorFilter.src.includes('list_mark1.png')) {
         PostsArray.filterConfig = 'author';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 1);
-        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
+        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     } else {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
-        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
+        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }
@@ -220,12 +249,12 @@ createdAtFilter.onclick = () => {
     if (createdAtFilter.src.includes('list_mark1.png')) {
         PostsArray.filterConfig = 'createdAt';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 2);
-        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
+        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     } else {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
-        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
+        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }
@@ -233,14 +262,51 @@ likesFilter.onclick = () => {
     if (likesFilter.src.includes('list_mark1.png')) {
         PostsArray.filterConfig = 'likes';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 3);
-        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
+        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     } else {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
-        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
+        currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }
 
 const findByHashtag = document.querySelector('#findByHashtag');
+findByHashtag.onfocus = () => {
+    if (findByHashtag.value === '') {
+        findByHashtag.value = '#';
+    }
+}
+findByHashtag.onblur = () => {
+    if (findByHashtag.value === '#') {
+        findByHashtag.value = '';
+    }
+}
+findByHashtag.addEventListener('keydown', function (event) {
+    if (event.code === 'Enter') {
+        const currentTag = findByHashtag.value;
+        if (currentTag === '' || currentTag === '#') {
+            window.open('index.html', '_self');
+        } else {
+            photoPosts = photoPosts.filterByTag(currentTag);
+            currentSkip = 0;
+            currentTop = 10 > photoPosts.Length ? 10 : photoPosts.Length;
+            currentPhotoPosts = View.showPage(currentSkip, currentTop, photoPosts, currentAccount);
+            View.resetPageCounter(pageCounter, currentPhotoPosts, prevPageButton, nextPageButton);
+            switch (PostsArray.filterConfig) {
+                case 'author':
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 1);
+                    break;
+                case 'createdAt':
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 2);
+                    break;
+                case 'likes':
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 3);
+                    break;
+                default:
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
+            }
+        }
+    }
+});
