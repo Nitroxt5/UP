@@ -136,6 +136,7 @@ p3 {
     margin-top: 5.5%;
     width: 60%;
     height: 9%;
+    visibility: hidden;
 }
 .pic {
     border-bottom: solid #000000 1px;
