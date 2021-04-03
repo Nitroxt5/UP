@@ -17,6 +17,17 @@ function transformURI(URI) {
     return 'pictures/' + str.pop();
 }
 
+function numLength(num) {
+    let number = num;
+    let k = 0;
+    while (number) {
+        number /= 10;
+        number = Math.floor(number);
+        k++;
+    }
+    return k;
+}
+
 class Post {
     #id;
     #description;
@@ -89,33 +100,38 @@ class Post {
     }
 
     validatePost(photoPosts) {
-        if (photoPosts.checkID(this.#id)) {
-            return false;
-        }
         if (this.#description.length > 200) {
             return false;
         }
-        if (this.#author.length === 0) {
+        if (this.#author.length === 0 || this.#author.length > 20) {
             return false;
         }
         if (this.#photoLink.length === 0) {
             return false;
         }
-        if (this.#name.length === 0) {
+        if (this.#name.length === 0 || this.#name.length > 20) {
             return false;
         }
-        if (this.#country.length === 0) {
+        if (this.#country.length === 0 || this.#country.length > 30) {
             return false;
         }
-        if (this.#birthYear.length === 0) {
+        if (!Number.isInteger(this.#birthYear)) {
+            return false;
+        }
+        if (numLength(this.#birthYear) > 4) {
             return false;
         }
         if (this.#likes < 0) {
             return false;
         }
-        for (let i = 0; i < this.#hashtags.length; i++) {
-            if (this.#hashtags[i].charAt(0) !== '#') {
-                return false;
+        if (this.#hashtags.length > 1 || this.#hashtags[0] !== '') {
+            for (let i = 0; i < this.#hashtags.length; i++) {
+                if (this.#hashtags[i].charAt(0) !== '#') {
+                    return false;
+                }
+                if (this.#hashtags[i].length > 20) {
+                    return false;
+                }
             }
         }
         return true;
@@ -196,7 +212,17 @@ class PostsArray {
         let photoPostsCopy = this.#photoPosts.slice(skip, skip + top);
         switch (PostsArray.filterConfig) {
             case 'createdAt':
-                photoPostsCopy.sort((a, b) => b.CreatedAt - a.CreatedAt);
+                photoPostsCopy.sort(function (a, b) {
+                    const nameA = a.Name.toLowerCase();
+                    const nameB = b.Name.toLowerCase();
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
                 break;
             case 'author':
                 photoPostsCopy.sort(function (a, b) {
@@ -222,6 +248,10 @@ class PostsArray {
         return arr;
     }
 
+    reverse() {
+        this.#photoPosts.reverse();
+    }
+
     filterByTag(hashtag) {
         return new PostsArray(this.#photoPosts.filter(post => post.Hashtags.includes(hashtag)));
     }
@@ -234,6 +264,10 @@ class PostsArray {
         return this.#photoPosts[ind];
     }
 
+    getIndByID(id) {
+        return this.#photoPosts.findIndex(post => post.ID === id);
+    }
+
     addPost(photoPost) {
         if (photoPost.validatePost(this)) {
             this.#photoPosts.push(photoPost);
@@ -243,12 +277,15 @@ class PostsArray {
     }
 
     exchangePost(photoPost) {
-        const ind = this.#photoPosts.findIndex(post => post.ID === photoPost.ID);
-        if (ind === -1) {
-            return false;
+        if (photoPost.validatePost(this)) {
+            const ind = this.#photoPosts.findIndex(post => post.ID === photoPost.ID);
+            if (ind === -1) {
+                return false;
+            }
+            this.#photoPosts[ind] = photoPost;
+            return true;
         }
-        this.#photoPosts[ind] = photoPost;
-        return true;
+        return false;
     }
 
     removePost(id) {
@@ -256,8 +293,8 @@ class PostsArray {
         if (ind === -1) {
             return false;
         }
-        this.#photoPosts.splice(ind, 1);
-        return true;
+        const deletedArr = this.#photoPosts.splice(ind, 1);
+        return deletedArr[0];
     }
 
     get Length() {
@@ -283,16 +320,16 @@ class Account {
     }
 
     validateAccount(accounts) {
-        if (this.#login.length === 0) {
+        if (this.#login.length === 0 || this.#login.length > 20) {
             return false;
         }
         if (accounts.checkLogin(this.#login)) {
             return false;
         }
-        if (this.#password.length < 8) {
+        if (this.#password.length < 8 || this.#password.length > 20) {
             return false;
         }
-        if (this.#email.length === 0) {
+        if (this.#email.length === 0 || this.#email.length > 40) {
             return false;
         }
         return true;
@@ -414,10 +451,19 @@ class View {
         let photoPostsPage = photoPosts.getPage(skip, top);
         for (let i = 0; i < photoPostsPage.Length; i++) {
             main2.children[i].style.visibility = 'visible';
+            const like = main2.children[i].querySelector('.like');
+            const deleteButton = main2.children[i].querySelector('.delete');
+            const editButton = main2.children[i].querySelector('.edit');
+            deleteButton.style.visibility = 'hidden';
+            editButton.style.visibility = 'hidden';
+            like.src = 'pictures/like.png';
             if (currentAccount !== '') {
-                const like = main2.children[i].querySelector('.like');
                 if (!photoPostsPage.getPostByInd(i).likePossibility(currentAccount)) {
                     like.src = 'pictures/like2.png';
+                }
+                if (photoPostsPage.getPostByInd(i).Author === currentAccount.login) {
+                    deleteButton.style.visibility = 'visible';
+                    editButton.style.visibility = 'visible';
                 }
             }
             const pic = main2.children[i].querySelector('.pic');
@@ -435,6 +481,10 @@ class View {
         }
         for (let i = photoPostsPage.Length; i < 10; i++) {
             main2.children[i].style.visibility = 'hidden';
+            const deleteButton = main2.children[i].querySelector('.delete');
+            const editButton = main2.children[i].querySelector('.edit');
+            deleteButton.style.visibility = 'hidden';
+            editButton.style.visibility = 'hidden';
         }
         return photoPostsPage;
     }
@@ -518,7 +568,12 @@ class View {
         description = description.nextElementSibling.nextElementSibling.nextElementSibling;
         description.textContent = `Описание: ${post.description}`;
         description = description.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling;
-        description.textContent = `Теги: ${tagsToString(post.hashtags)}`;
+        const tags = tagsToString(post.hashtags);
+        if (tags === '') {
+            description.textContent = `Теги: отсутствуют`;
+        } else {
+            description.textContent = `Теги: ${tags}`;
+        }
     }
 }
 
@@ -527,7 +582,7 @@ const footerText = `ОГНЕСТРЕЛЬНОЕ ОРУЖИЕ Филиппов М�
 let accounts;
 let currentAccount;
 let currentSkip = 0;
-let currentTop = 10;
+const currentTop = 10;
 let photoPosts;
 let currentPhotoPosts;
 

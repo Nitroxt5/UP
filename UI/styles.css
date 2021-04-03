@@ -222,6 +222,7 @@ p4 {
 }
 .like {
     position: relative;
+    cursor: pointer;
     margin-top: 6%;
     margin-left: 1%;
     width: 5%;
@@ -623,6 +624,20 @@ p6 {
 }
 .createPostButton:hover {
     background: #606060;
+}
+.delete {
+    position: relative;
+    cursor: pointer;
+    margin-top: 6%;
+    margin-left: 20%;
+    visibility: hidden;
+}
+.edit {
+    position: relative;
+    cursor: pointer;
+    margin-top: 6%;
+    margin-left: 20%;
+    visibility: hidden;
 }
 
 

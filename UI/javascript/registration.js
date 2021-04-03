@@ -20,7 +20,7 @@ regButton.onclick = () => {
         inputEmail.value = '';
         inputLogin.value = '';
         inputPassword.value = '';
-        error.textContent = 'Ошибка! Одно из полей пусто или пользователь с таким именем уже существует';
+        error.textContent = 'Ошибка ввода данных!';
     } else {
         error.textContent = '';
         localStorage.setItem('currentAccount', newAcc.stringify());

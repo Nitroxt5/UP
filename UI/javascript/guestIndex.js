@@ -23,6 +23,9 @@ function indexLoad() {
             View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
     }
     prevPageButton.style.visibility = 'hidden';
+    if (photoPosts.Length <= 10) {
+        nextPageButton.style.visibility = 'hidden';
+    }
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }
@@ -103,6 +106,7 @@ authorFilter.onclick = () => {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
+        currentPhotoPosts.reverse();
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
@@ -116,6 +120,7 @@ createdAtFilter.onclick = () => {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
+        currentPhotoPosts.reverse();
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
@@ -129,6 +134,7 @@ likesFilter.onclick = () => {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
+        currentPhotoPosts.reverse();
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);

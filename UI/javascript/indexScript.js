@@ -5,6 +5,7 @@ const prevPageButton = document.querySelector('.prevPageButton');
 const nextPageButton = document.querySelector('.nextPageButton');
 const pageCounter = document.querySelector('.pageCounter');
 const accountName = document.querySelector('.account');
+const findByHashtag = document.querySelector('#findByHashtag');
 
 function indexLoad() {
     photoPosts = View.downloadPosts();
@@ -29,12 +30,14 @@ function indexLoad() {
         nextPageButton.style.visibility = 'hidden';
     }
     accountName.textContent = currentAccount.login;
+    findByHashtag.value = 'Поиск по хештэгам';
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }
 document.addEventListener("DOMContentLoaded", indexLoad);
 
 nextPageButton.onclick = () => {
+
     if (currentSkip + currentTop + 10 <= photoPosts.Length) {
         currentSkip += 10;
     } else {
@@ -241,6 +244,7 @@ authorFilter.onclick = () => {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
+        currentPhotoPosts.reverse();
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
@@ -254,6 +258,7 @@ createdAtFilter.onclick = () => {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
+        currentPhotoPosts.reverse();
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
@@ -267,32 +272,35 @@ likesFilter.onclick = () => {
         PostsArray.filterConfig = 'none';
         View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
         currentPhotoPosts = photoPosts.getPage(currentSkip, currentTop);
+        currentPhotoPosts.reverse();
         currentPhotoPosts = View.showPage(0, 10, currentPhotoPosts, currentAccount);
     }
     localStorage.setItem('filterConfig', PostsArray.filterConfig);
 }
 
-const findByHashtag = document.querySelector('#findByHashtag');
 findByHashtag.onfocus = () => {
-    if (findByHashtag.value === '') {
+    if (findByHashtag.value === 'Поиск по хештэгам') {
         findByHashtag.value = '#';
     }
 }
 findByHashtag.onblur = () => {
-    if (findByHashtag.value === '#') {
-        findByHashtag.value = '';
+    if (findByHashtag.value === '#' || findByHashtag.value === '') {
+        findByHashtag.value = 'Поиск по хештэгам';
     }
 }
 findByHashtag.addEventListener('keydown', function (event) {
     if (event.code === 'Enter') {
-        const currentTag = findByHashtag.value;
-        if (currentTag === '' || currentTag === '#') {
+        let currentTag = findByHashtag.value;
+        if (currentTag === '' || currentTag === '#' || currentTag === 'Поиск по хештэгам') {
             window.open('index.html', '_self');
         } else {
+            if (currentTag.charAt(0) !== '#') {
+                currentTag = '#' + currentTag;
+                findByHashtag.value = currentTag;
+            }
             photoPosts = photoPosts.filterByTag(currentTag);
             currentSkip = 0;
-            currentTop = 10 > photoPosts.Length ? 10 : photoPosts.Length;
-            currentPhotoPosts = View.showPage(currentSkip, currentTop, photoPosts, currentAccount);
+            currentPhotoPosts = View.showPage(currentSkip, 10 > photoPosts.Length ? 10 : photoPosts.Length, photoPosts, currentAccount);
             View.resetPageCounter(pageCounter, currentPhotoPosts, prevPageButton, nextPageButton);
             switch (PostsArray.filterConfig) {
                 case 'author':
@@ -310,3 +318,157 @@ findByHashtag.addEventListener('keydown', function (event) {
         }
     }
 });
+
+const deleteButtons = document.querySelectorAll('.delete');
+deleteButtons[0].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(0).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[1].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(1).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[2].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(2).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[3].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(3).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[4].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(4).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[5].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(5).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[6].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(6).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[7].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(7).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[8].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(8).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+deleteButtons[9].onclick = () => {
+    const ans = confirm('Вы уверены, что хотите удалить этот пост?');
+    if (ans) {
+        const deleteID = currentPhotoPosts.getPostByInd(9).ID;
+        photoPosts.removePost(deleteID);
+        View.uploadPosts(photoPosts)
+        localStorage.removeItem('post' + photoPosts.Length);
+        alert('Пост удален');
+        window.open('index.html', '_self');
+    }
+}
+
+const editButtons = document.querySelectorAll('.edit');
+editButtons[0].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(0).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[1].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(1).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[2].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(2).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[3].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(3).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[4].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(4).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[5].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(5).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[6].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(6).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[7].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(7).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[8].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(8).stringify());
+    window.open('addphoto.html', '_self');
+}
+editButtons[9].onclick = () => {
+    localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(9).stringify());
+    window.open('addphoto.html', '_self');
+}
