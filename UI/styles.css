@@ -639,6 +639,26 @@ p6 {
     margin-left: 20%;
     visibility: hidden;
 }
-
+#findByKeyword {
+    position: absolute;
+    left: 5%;
+    top: 80%;
+    border: none;
+    background-image: url('pictures/searcher_mark.png');
+    background-repeat: no-repeat;
+    background-position: 8px 5px;
+    width: 80%;
+    font-size: 87%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 30px;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.keywordText {
+    position: relative;
+    top: 55%;
+}
 
 

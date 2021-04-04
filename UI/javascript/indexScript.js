@@ -6,6 +6,7 @@ const nextPageButton = document.querySelector('.nextPageButton');
 const pageCounter = document.querySelector('.pageCounter');
 const accountName = document.querySelector('.account');
 const findByHashtag = document.querySelector('#findByHashtag');
+const findByKeyword = document.querySelector('#findByKeyword');
 
 function indexLoad() {
     photoPosts = View.downloadPosts();
@@ -31,6 +32,8 @@ function indexLoad() {
     }
     accountName.textContent = currentAccount.login;
     findByHashtag.value = 'Поиск по хештэгам';
+    findByKeyword.value = 'Введите ключевое слово';
+    window.scroll(0, 0);
     const footer = document.querySelector('.footerText');
     footer.textContent = footerText;
 }
@@ -290,6 +293,7 @@ findByHashtag.onblur = () => {
 }
 findByHashtag.addEventListener('keydown', function (event) {
     if (event.code === 'Enter') {
+        window.scroll(0, 0);
         let currentTag = findByHashtag.value;
         if (currentTag === '' || currentTag === '#' || currentTag === 'Поиск по хештэгам') {
             window.open('index.html', '_self');
@@ -300,8 +304,8 @@ findByHashtag.addEventListener('keydown', function (event) {
             }
             photoPosts = photoPosts.filterByTag(currentTag);
             currentSkip = 0;
-            currentPhotoPosts = View.showPage(currentSkip, 10 > photoPosts.Length ? 10 : photoPosts.Length, photoPosts, currentAccount);
-            View.resetPageCounter(pageCounter, currentPhotoPosts, prevPageButton, nextPageButton);
+            currentPhotoPosts = View.showPage(currentSkip, 10 < photoPosts.Length ? 10 : photoPosts.Length, photoPosts, currentAccount);
+            View.resetPageCounter(pageCounter, photoPosts, prevPageButton, nextPageButton);
             switch (PostsArray.filterConfig) {
                 case 'author':
                     View.filterChosen(authorFilter, createdAtFilter, likesFilter, 1);
@@ -472,3 +476,44 @@ editButtons[9].onclick = () => {
     localStorage.setItem('editPost', currentPhotoPosts.getPostByInd(9).stringify());
     window.open('addphoto.html', '_self');
 }
+
+findByKeyword.onfocus = () => {
+    if (findByKeyword.value === 'Введите ключевое слово') {
+        findByKeyword.value = '';
+    }
+}
+findByKeyword.onblur = () => {
+    if (findByKeyword.value === '') {
+        findByKeyword.value = 'Введите ключевое слово';
+    }
+}
+findByKeyword.addEventListener('keydown', function (event) {
+    if (event.code === 'Enter') {
+        window.scroll(0, 0);
+        let currentKey = findByKeyword.value;
+        if (currentKey === '' || currentKey === 'Введите ключевое слово') {
+            window.open('index.html', '_self');
+        } else {
+            photoPosts = View.downloadPosts();
+            photoPosts = photoPosts.filterByKeyword(currentKey);
+            console.dir(photoPosts);
+            currentSkip = 0;
+            currentPhotoPosts = View.showPage(currentSkip, 10 < photoPosts.Length ? 10 : photoPosts.Length, photoPosts, currentAccount);
+            console.dir(currentPhotoPosts);
+            View.resetPageCounter(pageCounter, photoPosts, prevPageButton, nextPageButton);
+            switch (PostsArray.filterConfig) {
+                case 'author':
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 1);
+                    break;
+                case 'createdAt':
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 2);
+                    break;
+                case 'likes':
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 3);
+                    break;
+                default:
+                    View.filterChosen(authorFilter, createdAtFilter, likesFilter, 0);
+            }
+        }
+    }
+});

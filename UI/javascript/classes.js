@@ -256,6 +256,30 @@ class PostsArray {
         return new PostsArray(this.#photoPosts.filter(post => post.Hashtags.includes(hashtag)));
     }
 
+    filterByKeyword(keyword) {
+        return new PostsArray(this.#photoPosts.filter(post => {
+            if (post.Author.includes(keyword)) {
+                return true;
+            }
+            if (post.Name.includes(keyword)) {
+                return true;
+            }
+            if (post.Description.includes(keyword)) {
+                return true;
+            }
+            if (post.BirthYear.toString().includes(keyword)) {
+                return true;
+            }
+            if (post.Country.includes(keyword)) {
+                return true;
+            }
+            if (dateToString(post.CreatedAt).includes(keyword)) {
+                return true;
+            }
+            return false;
+        }));
+    }
+
     getPostByID(id) {
         return this.#photoPosts.find(post => post.ID === id);
     }
