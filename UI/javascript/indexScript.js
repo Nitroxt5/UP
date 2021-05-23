@@ -496,10 +496,8 @@ findByKeyword.addEventListener('keydown', function (event) {
         } else {
             photoPosts = View.downloadPosts();
             photoPosts = photoPosts.filterByKeyword(currentKey);
-            console.dir(photoPosts);
             currentSkip = 0;
             currentPhotoPosts = View.showPage(currentSkip, 10 < photoPosts.Length ? 10 : photoPosts.Length, photoPosts, currentAccount);
-            console.dir(currentPhotoPosts);
             View.resetPageCounter(pageCounter, photoPosts, prevPageButton, nextPageButton);
             switch (PostsArray.filterConfig) {
                 case 'author':
